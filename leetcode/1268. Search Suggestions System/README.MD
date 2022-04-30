@@ -56,11 +56,11 @@ After typing mou, mous and mouse the system suggests ["mouse","mousepad"]
 ## Solution 1. Trie + DFS
 
 ```py
-// OJ: https://leetcode.com/problems/search-suggestions-system/
-// Author: Duy
-// Time: O(T*S) where T is the size of all the content in the `products`, S is the length of `searchWord`.
-// Space: O(T) for the tree
-// Ref: https://leetcode.com/problems/search-suggestions-system/discuss/1242823/C%2B%2BPython-3-solutions-Clean-and-Concise
+# OJ: https://leetcode.com/problems/search-suggestions-system/
+# Author: Duy
+# Time: O(T*S) where T is the size of all the content in the `products`, S is the length of `searchWord`.
+# Space: O(T) for the tree
+# Ref: https://leetcode.com/problems/search-suggestions-system/discuss/1242823/C%2B%2BPython-3-solutions-Clean-and-Concise
 class Trie:
     # Use Trie to keep track of prefix
     def __init__(self):
@@ -102,4 +102,31 @@ class Solution:
                 res.append([])
         return res
             else:
+```
+
+## Solution 2. Sort and Filter
+
+```py
+# OJ: https://leetcode.com/problems/search-suggestions-system/
+# Author: Duy
+# Time: O(M*N), N is number of products, M is length of searchWord
+# Space: O(N)
+class Solution:
+    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+        res = list()
+        products.sort()
+        # This for loop cost O(M * N)
+        for i, c in enumerate(searchWord):
+            r = list()
+            # Find all p that has the same c
+            for p in products:
+                if i < len(p) and c == p[i]:
+                    r.append(p)
+            # Only take first 3 answer
+            res.append(r[:3])
+            # Update our products
+            # Save time for next search
+            products = r
+        return res
+            if cur.word != None:
 ```
