@@ -16,6 +16,7 @@
 | 442  | Find All Duplicates in an Array                                    |            | [Solution](/leetcode/442.%20Find%20All%20Duplicates%20in%20an%20Array/)                                                 |
 | 694  | Number of Distinct Islands                                         |            | [Solution](/leetcode/694.%20Number%20of%20Distinct%20Islands/)                                                          |
 | 763  | Partition Labels                                                   |            | [Solution](/leetcode/763.%20Partition%20Labels/)                                                                        |
+| 819  | Most Common Word                                                   |            | [Solution](/leetcode/819.%20Most%20Common%20Word/)                                                                      |
 | 937  | Reorder Data in Log Files                                          |            | [Solution](/leetcode/937.%20Reorder%20Data%20in%20Log%20Files/)                                                         |
 | 1152 | Analyze User Website Visit Pattern                                 |            | [Solution](/leetcode/1152.%20Analyze%20User%20Website%20Visit%20Pattern/)                                               |
 | 1268 | Search Suggestions System                                          |            | [Solution](/leetcode/1268.%20Search%20Suggestions%20System/)                                                            |
