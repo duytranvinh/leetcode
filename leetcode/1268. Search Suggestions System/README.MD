@@ -55,7 +55,7 @@ After typing mou, mous and mouse the system suggests ["mouse","mousepad"]
 
 ## Solution 1. Trie + DFS
 
-```
+```py
 // OJ: https://leetcode.com/problems/search-suggestions-system/
 // Author: Duy
 // Time: O(T*S) where T is the size of all the content in the `products`, S is the length of `searchWord`.
