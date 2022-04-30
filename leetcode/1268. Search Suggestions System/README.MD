@@ -101,7 +101,6 @@ class Solution:
                 cur = None
                 res.append([])
         return res
-            else:
 ```
 
 ## Solution 2. Sort and Filter
@@ -128,5 +127,4 @@ class Solution:
             # Save time for next search
             products = r
         return res
-            if cur.word != None:
 ```
