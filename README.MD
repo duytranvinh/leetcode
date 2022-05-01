@@ -10,6 +10,7 @@ Inspired by [Richard Liu](https://github.com/lzl124631x/LeetCode)
 | ---- | ------------------------------------------------------------------ | ---------- | ----------------------------------------------------------------------------------------------------------------------- |
 | 7    | Reverse Integer                                                    |            | [Solution](/leetcode/7.%20Reverse%20Integer/)                                                                           |
 | 12   | Integer to Roman                                                   |            | [Solution](/leetcode/12.%20Integer%20to%20Roman/)                                                                       |
+| 28   | Implement strStr()                                                 |            | [Solution](/leetcode/28.%20Implement%20strStr%28%29)                                                                    |
 | 56   | Merge Intervals                                                    |            | [Solution](/leetcode/56.%20Merge%20Intervals/)                                                                          |
 | 62   | Unique Paths                                                       |            | [Solution](/leetcode/62.%20Unique%20Paths/)                                                                             |
 | 133  | Clone Graph                                                        |            | [Solution](/leetcode/133.%20Clone%20Graph/)                                                                             |
@@ -20,6 +21,7 @@ Inspired by [Richard Liu](https://github.com/lzl124631x/LeetCode)
 | 345  | Reverse Vowels of a String                                         |            | [Solution](/leetcode/345.%20Reverse%20Vowels%20of%20a%20String/)                                                        |
 | 387  | Reverse Vowels of a String                                         |            | [Solution](/leetcode/387.%20First%20Unique%20Character%20in%20a%20String/)                                              |
 | 442  | Find All Duplicates in an Array                                    |            | [Solution](/leetcode/442.%20Find%20All%20Duplicates%20in%20an%20Array/)                                                 |
+| 572  | Subtree of Another Tree                                            | Easy       | [Solution](/leetcode/572.%20Subtree%20of%20Another%20Tree/)                                                             |
 | 694  | Number of Distinct Islands                                         |            | [Solution](/leetcode/694.%20Number%20of%20Distinct%20Islands/)                                                          |
 | 763  | Partition Labels                                                   |            | [Solution](/leetcode/763.%20Partition%20Labels/)                                                                        |
 | 819  | Most Common Word                                                   |            | [Solution](/leetcode/819.%20Most%20Common%20Word/)                                                                      |
