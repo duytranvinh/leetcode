@@ -1,6 +1,6 @@
 # LeetCode
 
-Author: [github.com/lzl124631x](https://github.com/lzl124631x)
+Author: [Duy Tran](https://github.com/duytranvinh)
 
 My Python Code for LeetCode.
 
