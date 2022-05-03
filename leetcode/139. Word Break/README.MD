@@ -68,6 +68,7 @@ Return dp[0]
 
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        wordDict = set(wordDict)
         n = len(s)
         m = len(wordDict)
         dp = [False for _ in range(n + 1)]
