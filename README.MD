@@ -21,6 +21,7 @@ Inspired by [Richard Liu](https://github.com/lzl124631x/LeetCode)
 | 208  | Implement Trie (Prefix Tree)                                       | Medium     | [Solution](leetcode/208.%20Implement%20Trie%20%28Prefix%20Tree%29)                                                      |
 | 242  | Valid Anagram                                                      |            | [Solution](/leetcode/242.%20Valid%20Anagram/)                                                                           |
 | 253  | Meeting Rooms II                                                   |            | [Solution](/leetcode/253.%20Meeting%20Rooms%20II/)                                                                      |
+| 268  | Missing Number                                                     | Easy       | [Solution](/leetcode/268.%20Missing%20Number/)                                                                          |
 | 345  | Reverse Vowels of a String                                         |            | [Solution](/leetcode/345.%20Reverse%20Vowels%20of%20a%20String/)                                                        |
 | 380  | Insert Delete GetRandom O(1)                                       | Medium     | [Solution](/leetcode/380.%20Insert%20Delete%20GetRandom%20O%281%29/)                                                    |
 | 387  | Reverse Vowels of a String                                         |            | [Solution](/leetcode/387.%20First%20Unique%20Character%20in%20a%20String/)                                              |
