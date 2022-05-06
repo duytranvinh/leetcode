@@ -32,6 +32,7 @@ Inspired by [Richard Liu](https://github.com/lzl124631x/LeetCode)
 | 694  | Number of Distinct Islands                                         |            | [Solution](/leetcode/694.%20Number%20of%20Distinct%20Islands/)                                                          |
 | 763  | Partition Labels                                                   |            | [Solution](/leetcode/763.%20Partition%20Labels/)                                                                        |
 | 819  | Most Common Word                                                   |            | [Solution](/leetcode/819.%20Most%20Common%20Word/)                                                                      |
+| 828  | Count Unique Characters of All Substrings of a Given String        | Hard       | [Solution](/leetcode/828.%20Count%20Unique%20Characters%20of%20All%20Substrings%20of%20a%20Given%20String/)             |
 | 937  | Reorder Data in Log Files                                          |            | [Solution](/leetcode/937.%20Reorder%20Data%20in%20Log%20Files/)                                                         |
 | 1094 | Car Pooling                                                        |            | [Solution](/leetcode/1094.%20Car%20Pooling/)                                                                            |
 | 1152 | Analyze User Website Visit Pattern                                 |            | [Solution](/leetcode/1152.%20Analyze%20User%20Website%20Visit%20Pattern/)                                               |
