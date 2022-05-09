@@ -37,5 +37,6 @@ Inspired by [Richard Liu](https://github.com/lzl124631x/LeetCode)
 | 973  | K Closest Points to Origin                                         | Medium     | [Solution](/leetcode/973.%20K%20Closest%20Points%20to%20Origin/)                                                        |
 | 1094 | Car Pooling                                                        |            | [Solution](/leetcode/1094.%20Car%20Pooling/)                                                                            |
 | 1152 | Analyze User Website Visit Pattern                                 |            | [Solution](/leetcode/1152.%20Analyze%20User%20Website%20Visit%20Pattern/)                                               |
+| 1167 | Minimum Cost to Connect Sticks                                     | Medium     | [Solution](/leetcode/1167.%20Minimum%20Cost%20to%20Connect%20Sticks/)                                                   |
 | 1268 | Search Suggestions System                                          |            | [Solution](/leetcode/1268.%20Search%20Suggestions%20System/)                                                            |
 | 1465 | Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts |            | [Solution](/leetcode/1465.%20Maximum%20Area%20of%20a%20Piece%20of%20Cake%20After%20Horizontal%20and%20Vertical%20Cuts/) |
