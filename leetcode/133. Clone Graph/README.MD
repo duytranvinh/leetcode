@@ -71,7 +71,7 @@
 - [Clone Binary Tree With Random Pointer (Medium)](https://leetcode.com/problems/clone-binary-tree-with-random-pointer/)
 - [Clone N-ary Tree (Medium)](https://leetcode.com/problems/clone-n-ary-tree/)
 
-## Solution 1.
+## Solution 1. BFS
 
 ```PY
 # OJ: https://leetcode.com/problems/clone-graph/
@@ -112,4 +112,43 @@ class Solution:
                 visited[v].neighbors.append(visited[u])
         return head
 
+```
+
+## Solution 2. DFS
+
+Create a new node based old node
+
+Then we "add" its neighbors to the new node
+
+When we "add", we have to create a new node for the neighbors too
+
+We use hashmap to keep track which node has copied before `key: node, value: copy`
+
+If the neighbor has already been copied, we just return `map[node]`
+
+```py
+# OJ: https://leetcode.com/problems/clone-graph/
+# Author: Duy Tran
+# Time: O(N)
+# Space: O(N)
+
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+"""
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        oldToNew = dict()
+        def dfs(node):
+            if node in oldToNew:
+                return oldToNew[node]
+            copy = Node(node.val)
+            oldToNew[node] = copy
+            for nei in node.neighbors:
+                copy.neighbors.append(dfs(nei))
+            return copy
+        return dfs(node) if node else None
 ```

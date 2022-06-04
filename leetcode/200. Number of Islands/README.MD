@@ -67,25 +67,28 @@ class Solution:
         m = len(grid)
         n = len(grid[0]) if m else 0
         count = 0
-        dy = [-1, 0, 1, 0]
+        dy = [1, 0, -1, 0]
         dx = [0, 1, 0, -1]
+
+        def bfs(y, x):
+            grid[y][x] = '0'
+            q = [[y, x]]
+            while(q):
+                v = q.pop(0)
+                for i in range(4):
+                    y1 = v[0] + dy[i]
+                    x1 = v[1] + dx[i]
+                    if y1 < 0 or y1 >= m or x1 < 0 or x1 >= n:
+                        continue
+                    if grid[y1][x1] == '0': continue
+                    q.append([y1,x1])
+                    grid[y1][x1] = '0'
+
         for y in range(m):
             for x in range(n):
-                if grid[y][x] == '0': continue
-                grid[y][x] = '0'
+                if(grid[y][x] == '0'): continue
                 count += 1
-                q = list()
-                q.append([y,x])
-                while q:
-                    v = q[0]
-                    q.pop(0)
-                    for i in range(4):
-                        y1 = v[0] + dy[i]
-                        x1 = v[1] + dx[i]
-                        if y1 < 0 or y1 >= m or x1 < 0 or x1 >= n:
-                            continue
-                        if grid[y1][x1] == '0': continue
-                        q.append([y1,x1])
-                        grid[y1][x1] = '0'
+                bfs(y, x)
+
         return count
 ```
