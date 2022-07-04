@@ -69,6 +69,10 @@
 
 ## Solution 1.
 
+Use a `hash map` to keep track of each row, column and grid `map<int, set>`
+
+We calculate grid by `key = (r /3, c /3)`
+
 ```py
 # OJ: https://leetcode.com/problems/valid-sudoku/
 # Author: Duy Tran
