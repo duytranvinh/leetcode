@@ -55,44 +55,76 @@ Search every word in `s` to see if it's in the `wordDict`
 ```py
 # OJ: https://leetcode.com/problems/word-break-ii/
 # Author: Duy Tran
-# Time: O(N!)
-# Space: O(N + D)
+# Time: O(2^n) and n is length of string
+# Space: O(N + M) n is the length of string, and m is length of the 'wordDict'
 # Ref: https://github.com/lzl124631x/LeetCode/tree/master/leetcode/140.%20Word%20Break%20II
 
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
-        wordDict = set(wordDict)
+        wDict = set(wordDict)
         res = list()
-        r = list()
+        path = list()
         n = len(s)
-        dp = [-1 for _ in range(n + 1)]
+        dp = [False for _ in range(n + 1)]
         dp[n] = 1
-
         def dfs(st, i):
+            # end path
             if i == n:
                 tmp = str()
-                for w in r:
+                for w in path:
                     tmp += (' ' if len(tmp) else '') + w
                 res.append(tmp)
-                return True
 
+            # backtracking every possible path
             for j in range(i + 1, n + 1):
-                if dp[j] == 0: continue
                 sub = st[i:j]
-                if sub not in wordDict: continue
-                r.append(sub)
-                if dfs(st, j): dp[i] = 1
-                r.pop()
-
-            return bool(dp[i])
-
+                if sub not in wDict: continue
+                path.append(sub)
+                dfs(st, j)
+                path.pop()
+            
         dfs(s, 0)
         return res
+```
+
+Javascript
+
+```js
+/**
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {string[]}
+ */
+var wordBreak = function(s, wordDict) {
+    const wDict = new Set(wordDict);
+    const res = new Array();
+    const path = new Array();
+    const n = s.length;
+    const dfs = (st, i) => {
+        if (i === n) {
+            let tmp = new String();
+            for (const w of path) {
+                tmp += (tmp.length ? " " : "") + w
+            }
+            res.push(tmp);
+        }
+        for (var j = i + 1; j <= n; j++) {
+            const sub = st.substring(i, j);
+            if (!wDict.has(sub)) continue;
+            path.push(sub);
+            dfs(st, j)
+            path.pop();
+        }
+    }
+    dfs(s, 0);
+    return res;
+};
 ```
 
 ## Solution 2. Backtracking + Memoization
 
 Might not sufficient to find a solution
+
 Keep track the path that is used
 
 ```py

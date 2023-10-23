@@ -91,3 +91,31 @@ class Solution:
 
         return dp[0]
 ```
+
+Javascript
+
+```js
+/**
+ * @param {string} s
+ * @param {string[]} wordDict
+ * @return {boolean}
+ */
+var wordBreak = function(s, wordDict) {
+    wDict = new Set(wordDict);
+    n = s.length;
+    m = wDict.length;
+    const dp = new Array(n + 1).fill(false);
+    dp[n] = true;
+
+    for (var i = n - 1; i >= 0; i--) {
+        for (const w of wDict) {
+            const l = i + w.length;
+            if ( l <= n && s.substring(i, l) === w) {
+                dp[i] = dp[l];
+            }
+            if (dp[i]) break;
+        }
+    }
+    return dp[0];
+};
+```

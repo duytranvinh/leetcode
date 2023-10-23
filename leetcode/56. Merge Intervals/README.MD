@@ -74,3 +74,28 @@ class Solution:
         return res
 
 ```
+
+### Javascript
+
+```js
+/**
+ * @param {number[][]} intervals
+ * @return {number[][]}
+ */
+var merge = function(intervals) {
+    intervals.sort((a, b) => a[0] - b[0]);
+    const res = [];
+    for (const interval of intervals){
+        if (res.length === 0){
+            res.push(interval);
+            continue;
+        }
+        if (res.slice(-1)[0][1] < interval[0]){
+            res.push(interval);
+        } else {
+            res[res.length - 1][1] = Math.max(res.slice(-1)[0][1], interval[1])
+        }
+    }
+    return res;
+};
+```
