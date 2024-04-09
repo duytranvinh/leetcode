@@ -53,7 +53,7 @@
 - [Two Sum IV - Input is a BST (Easy)](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/)
 - [Two Sum Less Than K (Easy)](https://leetcode.com/problems/two-sum-less-than-k/)
 
-## Solution 1.
+## Solution 1. Two Pointers
 
 ```py
 # OJ: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
@@ -73,4 +73,17 @@ class Solution:
             else:
                 return [l + 1, r + 1]
 
+```
+
+Cleaner
+
+```py
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        l, r = 0, len(nums) - 1
+        while l < r:
+            cur = nums[l] + nums[r]
+            if cur == target: return [l + 1, r + 1]
+            elif cur < target: l += 1
+            else:  r -= 1
 ```

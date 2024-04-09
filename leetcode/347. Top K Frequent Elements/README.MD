@@ -97,3 +97,42 @@ class Solution:
         return res
 
 ```
+
+### Javascript
+
+```js
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var topKFrequent = function(nums, k) {
+    const hist = new Map(); // histogram to store {number: freq}
+    const freq = new Array(nums.length + 1).fill(0); // to store [list of number], with index is frequency
+    const res = []
+
+    nums.forEach(el => {
+        const val = hist.get(el) || 0;
+        hist.set(el, val + 1);
+    })
+
+    for (let [key, val] of hist) {
+        const tmp = freq[val] || [];
+        tmp.push(key);
+        freq[val] = tmp;
+    }
+
+    freq.reverse() // To get the highest frequency first
+    for (const el of freq) {
+        if (k < 1) break;
+        if (el) { // if el !== 0
+            for (let val of el) {
+              res.push(val);
+              k--;
+              if (k === 0) return res;  
+            }
+        }
+    }
+    return res;
+};
+```
