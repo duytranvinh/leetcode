@@ -62,3 +62,27 @@ class Solution:
         return True
 
 ```
+
+## Solution 2.
+
+Create two hashmap to keep track of count for each character in each word.
+
+Return true if they (hashmap) are the same.
+
+```py
+# OJ: https://leetcode.com/problems/valid-anagram
+# Author: Duy Tran
+# Time: O(N)
+# Space: O(N)
+
+from  collections  import  defaultdict
+class  Solution:
+        def  isAnagram(self,  s:  str,  t:  str)  ->  bool:
+                if  (len(s)  !=  len(t)):
+                        return  False
+                c1,  c2  =  defaultdict(int),  defaultdict(int)
+                for  i  in  range(len(s)):
+                        c1[s[i]]  +=  1
+                        c2[t[i]]  +=  1
+                return  c1  ==  c2
+```

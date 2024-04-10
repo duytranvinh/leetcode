@@ -53,3 +53,18 @@ class Solution:
 ## Solution 2. Sorting
 
 Sort then find `if nums[i] == nums[i - 1]: return True`
+
+```py
+# OJ: https://leetcode.com/problems/contains-duplicate
+# Author: Duy Tran
+# Time: O(N logN)
+# Space: O(1)
+
+class  Solution:
+        def  containsDuplicate(self,  nums:  List[int])  ->  bool:
+                nums.sort()
+                for  i  in  range(1,  len(nums)):
+                        if  nums[i]  ==  nums[i  -  1]:
+                                return  True
+                return  False
+```
