@@ -76,27 +76,140 @@ We calculate grid by `key = (r /3, c /3)`
 ```py
 # OJ: https://leetcode.com/problems/valid-sudoku/
 # Author: Duy Tran
-# Time: O()
-# Space: O()
+# Time: O(N) => size of the board
+# Space: O(N) => size of the board
 
 class Solution:
-        def isValidSudoku(self, board: List[List[str]]) -> bool:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
         cols = collections.defaultdict(set)
         rows = collections.defaultdict(set)
         squares = collections.defaultdict(set) # key = (r /3, c /3)
 
+        m = len(board[0])
+        n = len(board)
         for r in range(9):
             for c in range(9):
-                if board[r][c] == ".":
+                cur = board[r][c]
+                if cur == ".":
                     continue
-                if (board[r][c] in rows[r] or
-                    board[r][c] in cols[c] or
-                    board[r][c] in squares[(r // 3, c // 3)]):
+                if (cur in rows[r] or
+                    cur in cols[c] or
+                    cur in squares[(r // 3, c // 3)]):
                     return False
-                cols[c].add(board[r][c])
-                rows[r].add(board[r][c])
-                squares[(r // 3, c // 3)].add(board[r][c])
+                cols[c].add(cur)
+                rows[r].add(cur)
+                squares[(r // 3, c // 3)].add(cur)
 
         return True
 
+```
+
+Javascript
+
+```js
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
+var isValidSudoku = function (board) {
+  m = board[0].length;
+  n = board.length;
+  const cols = getBoard(n);
+  const rows = getBoard(n);
+  const squares = getBoard(n);
+
+  for (let r = 0; r < n; r++) {
+    for (let c = 0; c < m; c++) {
+      const cur = board[r][c];
+      if (cur === ".") {
+        continue;
+      }
+      const box = Math.floor(r / 3) * 3 + Math.floor(c / 3);
+      if (cols[c].has(cur) || rows[r].has(cur) || squares[box].has(cur)) {
+        return false;
+      }
+      cols[c].add(cur);
+      rows[r].add(cur);
+      squares[box].add(cur);
+    }
+  }
+
+  return true;
+};
+
+const getBoard = (n) => {
+  const arr = new Array(n).fill();
+  return arr.map(() => new Set());
+};
+```
+
+Javascript
+
+```js
+/**
+ * @param {character[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ */
+var solveSudoku = function (board) {
+  m = board[0].length;
+  n = board.length;
+  const cols = getBoard(n);
+  const rows = getBoard(n);
+  const squares = getBoard(n);
+  for (let r = 0; r < n; r++) {
+    for (let c = 0; c < m; c++) {
+      const cur = board[r][c];
+      const box = Math.floor(r / 3) * 3 + Math.floor(c / 3);
+      if (cur !== ".") {
+        cols[c].add(cur);
+        rows[r].add(cur);
+        squares[box].add(cur);
+      }
+    }
+  }
+  dfs(board, cols, rows, squares);
+};
+
+const dfs = (board, cols, rows, squares) => {
+  const n = board.length;
+  const m = board[0].length;
+  for (let r = 0; r < n; r++) {
+    for (let c = 0; c < m; c++) {
+      const cur = board[r][c];
+      if (cur !== ".") {
+        continue;
+      }
+      const box = Math.floor(r / 3) * 3 + Math.floor(c / 3);
+      for (let i = 1; i <= n; i++) {
+        const curNum = String(i);
+        if (isValid(board, r, c, curNum, cols, rows, squares)) {
+          board[r][c] = curNum;
+          cols[c].add(curNum);
+          rows[r].add(curNum);
+          squares[box].add(curNum);
+          if (dfs(board, cols, rows, squares)) return true;
+          cols[c].delete(curNum);
+          rows[r].delete(curNum);
+          squares[box].delete(curNum);
+        }
+      }
+      board[r][c] = ".";
+      return false;
+    }
+  }
+  return true;
+};
+
+const isValid = (board, r, c, curNum, cols, rows, squares) => {
+  const box = Math.floor(r / 3) * 3 + Math.floor(c / 3);
+  if (cols[c].has(curNum) || rows[r].has(curNum) || squares[box].has(curNum)) {
+    return false;
+  }
+  return true;
+};
+
+const getBoard = (n) => {
+  const arr = new Array(n).fill();
+  return arr.map(() => new Set());
+};
 ```

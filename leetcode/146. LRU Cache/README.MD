@@ -146,3 +146,248 @@ class LRUCache:
 # param_1 = obj.get(key)
 # obj.put(key,value)
 ```
+
+Same but a bit cleaner
+
+```py
+class Node:
+  def __init__(self, k: int, v: int):
+    self.key = k
+    self.val = v
+    self.prev = None
+    self.next = None
+
+class LRUCache:
+
+    def __init__(self, capacity: int):
+      self.cap = capacity
+      self.cache = {}
+      self.head = Node(0, 0)
+      self.tail = Node(0, 0)
+      self.head.next = self.tail
+      self.tail.prev = self.head
+
+    def remove(self, node):
+      p = node.prev
+      n = node.next
+      p.next = n
+      n.prev = p
+
+    # insert to the tail end, right side
+    def insert(self, node):
+      p = self.tail.prev
+      p.next = node
+      self.tail.prev = node
+      node.prev = p
+      node.next = self.tail
+
+    def get(self, key: int) -> int:
+      if key not in self.cache:
+        return -1
+
+      n = self.cache[key]
+      self.remove(n)
+      self.insert(n)
+      return self.cache[key].val
+
+
+    def put(self, key: int, value: int) -> None:
+      if key in self.cache:
+        self.remove(self.cache[key])
+      n = Node(key, value)
+      self.insert(n)
+      self.cache[key] =  n
+      if (len(self.cache) > self.cap):
+        lru = self.head.next
+        self.remove(lru)
+        del self.cache[lru.key]
+
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
+```
+
+Javascript with object for cache
+
+```js
+// This solution is using object works
+
+/**
+ * @param {number} key
+ * @param {number} value
+ * @return {void}
+ */
+var Node = function (k, v) {
+  this.key = k;
+  this.value = v;
+  this.prev = null;
+  this.next = null;
+};
+
+/**
+ * @param {number} capacity
+ */
+var LRUCache = function (capacity) {
+  this.cap = capacity;
+  // We need to keep track size here because checking object length take O(n)
+  // Therefore tracking size to help it with O(1)
+  // We can avoid this by using Map for cache instead of Object
+  this.size = 0;
+  this.cache = {};
+  this.head = new Node(0, 0);
+  this.tail = new Node(0, 0);
+  this.head.next = this.tail;
+  this.tail.prev = this.head;
+};
+
+LRUCache.prototype.remove = function (node) {
+  node.prev.next = node.next;
+  node.next.prev = node.prev;
+};
+
+LRUCache.prototype.insert = function (node) {
+  this.tail.prev.next = node;
+  const p = this.tail.prev;
+  this.tail.prev = node;
+  node.next = this.tail;
+  node.prev = p;
+};
+
+/**
+ * @param {number} key
+ * @return {number}
+ */
+LRUCache.prototype.get = function (key) {
+  if (!this.cache[key]) {
+    return -1;
+  }
+  const n = this.cache[key];
+  this.remove(n);
+  this.insert(n);
+  return n.value;
+};
+
+/**
+ * @param {number} key
+ * @param {number} value
+ * @return {void}
+ */
+LRUCache.prototype.put = function (key, value) {
+  if (!!this.cache[key]) {
+    this.remove(this.cache[key]);
+    this.size--;
+  }
+  const n = new Node(key, value);
+  this.insert(n);
+  this.size++;
+  this.cache[key] = n;
+
+  if (this.size > this.cap) {
+    const lru = this.head.next;
+    this.remove(this.head.next);
+    this.size--;
+    delete this.cache[lru.key];
+  }
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * var obj = new LRUCache(capacity)
+ * var param_1 = obj.get(key)
+ * obj.put(key,value)
+ */
+```
+
+Javascript with Map for cache
+
+```js
+// This solution is using object works
+
+/**
+ * @param {number} key
+ * @param {number} value
+ * @return {void}
+ */
+var Node = function (k, v) {
+  this.key = k;
+  this.value = v;
+  this.prev = null;
+  this.next = null;
+};
+
+/**
+ * @param {number} capacity
+ */
+var LRUCache = function (capacity) {
+  this.cap = capacity;
+  // We need to keep track size here because checking object length take O(n)
+  // Therefore tracking size to help it with O(1)
+  // We can avoid this by using Map for cache instead of Object
+  this.size = 0;
+  this.cache = {};
+  this.head = new Node(0, 0);
+  this.tail = new Node(0, 0);
+  this.head.next = this.tail;
+  this.tail.prev = this.head;
+};
+
+LRUCache.prototype.remove = function (node) {
+  node.prev.next = node.next;
+  node.next.prev = node.prev;
+};
+
+LRUCache.prototype.insert = function (node) {
+  this.tail.prev.next = node;
+  const p = this.tail.prev;
+  this.tail.prev = node;
+  node.next = this.tail;
+  node.prev = p;
+};
+
+/**
+ * @param {number} key
+ * @return {number}
+ */
+LRUCache.prototype.get = function (key) {
+  if (!this.cache[key]) {
+    return -1;
+  }
+  const n = this.cache[key];
+  this.remove(n);
+  this.insert(n);
+  return n.value;
+};
+
+/**
+ * @param {number} key
+ * @param {number} value
+ * @return {void}
+ */
+LRUCache.prototype.put = function (key, value) {
+  if (!!this.cache[key]) {
+    this.remove(this.cache[key]);
+    this.size--;
+  }
+  const n = new Node(key, value);
+  this.insert(n);
+  this.size++;
+  this.cache[key] = n;
+
+  if (this.size > this.cap) {
+    const lru = this.head.next;
+    this.remove(this.head.next);
+    this.size--;
+    delete this.cache[lru.key];
+  }
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * var obj = new LRUCache(capacity)
+ * var param_1 = obj.get(key)
+ * obj.put(key,value)
+ */
+```

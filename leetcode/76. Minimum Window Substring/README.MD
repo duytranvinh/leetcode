@@ -65,15 +65,17 @@ We keep track `have, need = 0, len(countT)`
 
 Then we slide window to build up Histogram for `s` as `window`
 
-To save space for our `window`, only need to add `c` that appear in `countT`
+To save space for our `window`, only need to add `c` that already appear in `countT`
 
 If `window[c] == countT[c]`, then we update our `have`
 
-When we reach `have == need`, we shrink our left side:
+When we reach `have == need`, we found our substring, we shrink our left side:
 
-- Update result. Find the minimum window
+- Update our current best result
 
-- Shrink left. Remove character from `window` if needed and update our `lo`
+- Shrink left. Remove character from `window`, if needed
+
+- Update our `lo`
 
 ```py
 # OJ: https://leetcode.com/problems/minimum-window-substring/
@@ -83,44 +85,90 @@ When we reach `have == need`, we shrink our left side:
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        if len(t) == 0 or len(t) > len(s):
-            return ""
+      if len(t) == 0 or len(t) > len(s):
+        return ''
+      countT, window = collections.defaultdict(int), collections.defaultdict(int)
+      for c in t:
+        countT[c] += 1
+      have, need = 0, len(countT)
+      res, resLen = [-1, -1], float("infinity")
+      lo, hi = 0, 0
+      while hi < len(s):
+        cur = s[hi]
+        # found a char in target, update our window
+        if cur in countT:
+          window[cur] += 1
+          # reach a desired count for cur char
+          if window[cur] == countT[cur]:
+            have += 1
 
-        countT, window = dict(), dict()
+        # we found our substring, now shrinking
+        while have == need:
+          # update current best result
+          if (hi - lo + 1) < resLen:
+            res = [lo, hi]
+            resLen = hi - lo + 1
 
-        for c in t:
-            countT[c] = countT.get(c, 0) + 1
+          #shrink left
+          curLo = s[lo]
+          if curLo in countT:
+            window[curLo] -= 1
+            if window[curLo] < countT[curLo]:
+              have -=1
+          lo += 1
+        hi += 1
+      lo, hi = res
+      return s[lo: hi + 1] if resLen != float("infinity") else ""
+```
 
-        have, need = 0, len(countT)
-        res, resLen = [-1, -1], float("infinity")
-        lo, hi = 0, 0
+Javascript
 
-        while hi < len(s):
-
-            c = s[hi]
-            if c in countT:
-                window[c] = window.get(c, 0) + 1
-                if window[c] == countT[c]: have += 1
-
-            # We shrinking until it's unvalid
-            while have == need:
-                # update result
-                if (hi - lo + 1) < resLen:
-                    res = [lo, hi]
-                    resLen = (hi - lo + 1)
-
-                # shrink left
-                charLo = s[lo]
-                if charLo in countT:
-                    window[charLo] -= 1
-                    if window[charLo] < countT[charLo]: have -= 1
-
-                lo += 1
-
-            hi += 1
-
-        lo, hi = res
-        return s[lo: hi + 1] if resLen != float("infinity") else ""
-
-
+```js
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {string}
+ */
+var minWindow = function (s, t) {
+  if (t.length === 0 || t.length > s.length) {
+    return "";
+  }
+  const countT = {};
+  const window = {};
+  for (const c of t) {
+    countT[c] = (countT[c] ?? 0) + 1;
+  }
+  let [have, need] = [0, Object.keys(countT).length];
+  let [res, resLen] = [[-1, -1], Infinity];
+  let lo = 0;
+  let hi = 0;
+  console.log(hi);
+  while (hi < s.length) {
+    const cur = s[hi];
+    if (!!countT[cur]) {
+      window[cur] = (window[cur] ?? 0) + 1;
+      if (window[cur] === countT[cur]) {
+        have++;
+      }
+    }
+    while (have === need) {
+      if (hi - lo + 1 < resLen) {
+        res = [lo, hi];
+        resLen = hi - lo + 1;
+      }
+      const curLo = s[lo];
+      if (!!countT[curLo]) {
+        window[curLo] -= 1;
+        if (window[curLo] < countT[curLo]) {
+          have--;
+        }
+      }
+      lo++;
+    }
+    hi++;
+  }
+  lo = res[0];
+  hi = res[1];
+  return resLen != Infinity ? s.substring(lo, hi + 1) : "";
+};
 ```
